@@ -9,9 +9,7 @@ fun main() {
 }
 
 val cubesLimit = mapOf(
-    "red" to 12,
-    "green" to 13,
-    "blue" to 14
+    "red" to 12, "green" to 13, "blue" to 14
 )
 
 val cubesPower = mutableMapOf<String, Int>()
@@ -31,12 +29,10 @@ fun getPowerForGame(game: String): Int {
     return cubesPower.values.fold(1) { acc, value -> acc * value }.also { cubesPower.clear() }
 }
 
-fun String.parseGameSets(): List<Pair<String, Int>> =
-    split(":").last().split(";")
-        .flatMap { set ->
-            set.split(",").map { cubes ->
-                val color = cubes.filter { it.isLetter() }
-                val count = cubes.filter { it.isDigit() }.toInt()
-                color to count
-            }
+fun String.parseGameSets(): List<Pair<String, Int>> = split(":").last().split(";").flatMap { set ->
+        set.split(",").map { cubes ->
+            val color = cubes.filter { it.isLetter() }
+            val count = cubes.filter { it.isDigit() }.toInt()
+            color to count
         }
+    }
