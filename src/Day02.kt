@@ -17,13 +17,13 @@ val cubesLimit = mapOf(
 val cubesPower = mutableMapOf<String, Int>()
 
 fun getValidGameId(game: String): Int {
-    println(game.parseGameSets())
     game.parseGameSets().forEach { (color, count) ->
         if (count > (cubesLimit[color] ?: 0)) return 0
     }
     return game.substringBefore(":").filter { it.isDigit() }.toInt()
 }
 
+// Works with any number of different colors
 fun getPowerForGame(game: String): Int {
     game.parseGameSets().forEach { (color, count) ->
         cubesPower[color] = maxOf(cubesPower.getOrDefault(color, 0), count)
