@@ -3,8 +3,11 @@ fun main() {
 
     val cardsInfo = buildList {
         cards.forEach { card ->
-            val (winningNumbers, myNumbers) = card.split(":").last().split("|")
-                .map { it.trim().split("\\s+".toRegex()).map(String::toInt) }
+            val (winningNumbers, myNumbers) = card.split(":").last().split("|").map {
+                    it.trim().split(" ").filter { number ->
+                        number.isNotEmpty()
+                    }.map(String::toInt)
+                }
 
             val count = winningNumbers.count { it in myNumbers }
             add(Pair(count, 1))
